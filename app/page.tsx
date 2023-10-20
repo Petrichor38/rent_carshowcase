@@ -5,14 +5,7 @@ import { CarCard, SearchBar, CustomFilter, Hero } from "../components";
 import ShowMore from "@/components/ShowMore";
 
 export default async function Home({ searchParams }: HomeProps) {
-  const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer || "",
-    year: searchParams.year || 2022,
-    fuel: searchParams.fuel || "",
-    limit: searchParams.limit || 10,
-    model: searchParams.model || "",
-  });
-
+  const allCars = await fetchCars();
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
   return (
@@ -50,7 +43,6 @@ export default async function Home({ searchParams }: HomeProps) {
         ) : (
           <div className='home__error-container'>
             <h2 className='text-black text-xl font-bold'>Oops, no results</h2>
-            <p>{allCars?.message}</p>
           </div>
         )}
       </div>
